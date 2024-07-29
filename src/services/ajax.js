@@ -1,10 +1,13 @@
 import axios from "axios";  
 
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+export const VENDER_URL = process.env.NEXT_PUBLIC_VENDER_BASE_URL
+
 //AJAX interceptors
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     // Do something before request is sent
-    config.headers.Authorization = " "
+    config.headers.Authorization = ""
     return config;
   },
   function (error) {
@@ -28,15 +31,15 @@ axios.interceptors.response.use(function (response) {
 
 export class Ajax{
     static sendGetReq(url){
-        return axios.get(url)
+        return axios.get(`${BASE_URL}/${url}`)
      }
     static sendPostReq(url, data){
-        return axios.post(url, data)
+        return axios.post(`${BASE_URL}/${url}`, data)
      }
     static sendPutReq(url, data){
-        return axios.put(url, data)
+        return axios.put(`${BASE_URL}/${url}`, data)
      }
     static sendDeleteReq(url){
-        return axios.delete(url)
+        return axios.delete(`${BASE_URL}${url}`)
      }
 }
