@@ -1,0 +1,30 @@
+[
+    {
+        "lbl": "User ID",
+        "tag": "input",
+        "type": "text",
+        "name": "uid",
+        "isRequired": true,
+        "value": "",
+        "error": "",
+        "placeholder": "User id",
+        "criteria": ["REQUIRED"],
+        "errorMsgColumns": 4,
+        "inputCtrlColumns": 4,
+        "lblColumns": 4
+    },
+    {
+        "lbl": "Password",
+        "tag": "input",
+        "type": "password",
+        "name": "password",
+        "isRequired": true,
+        "value": "",
+        "error": "",
+        "placeholder": "Password",
+        "criteria": ["REQUIRED", "MIN5CHARS"],
+        "errorMsgColumns": 4,
+        "inputCtrlColumns": 4,
+        "lblColumns": 4
+    }
+]

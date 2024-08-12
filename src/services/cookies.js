@@ -1,6 +1,6 @@
 const { cookies } = require("next/headers");
 
-class AppCookie {
+export class AppCookie {
 
     // set current date after some days
     static getDate(days) {
@@ -32,5 +32,10 @@ class AppCookie {
    
     static async deleteCookie(key){ // it also expecting name and value
         await cookieStore.delete(key)
+    }
+
+    static async isLoggedIn(key){
+        const cookieObj = await cookieStore.get("token")
+        return cookieObj?.value ? true : false
     }
 }
