@@ -1,15 +1,18 @@
 "use client"
 import React, { useState } from 'react'
 import config from './configuration.json'
-import Input from '../../reusableComponents/inputControls/input/input'
-import Button from '../../reusableComponents/inputControls/Button/Button';
+// import Input from '../../reusableComponents/inputControls/input/input'
+// import Button from '../../reusableComponents/inputControls/Button/Button';
+import Input from '../reusableComponents/inputControls/Input'
+import Button from '../reusableComponents/inputControls/Button'
 import { fieldValidation, formValidation } from '@/services/validations'
 import { useAppCtx as useAppContext } from '@/context/appContex';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { Ajax } from '@/services/ajax'
 import { AppCookie } from '@/services/cookies';
-import Loader from '@/reusableComponents/Loader/Loader';
+// import Loader from '@/reusableComponents/Loader/Loader';
+import Loader from '../reusableComponents/Loader'
 import { useRouter } from 'next/navigation';
 
 const Login = () => {
@@ -30,11 +33,13 @@ const Login = () => {
       const res = await Ajax.sendPostReq("cust/login", { data: dataObj });
       const { token, _id, uid } = res?.data?.data
       if (token) {
+        alert('Success')
         sessionStorage.setItem("token", token)
         AppCookie.setCookies("token", token);
         AppCookie.setCookies("id", _id);
         AppCookie.setCookies("uid", uid);
         dispatch({ type: "AUTH", payload: { isLoggedIn: true, uid } })
+       
         if (sessionStorage.pathName) {
           router.push(sessionStorage.pathName)
           sessionStorage.pathName = "";
@@ -73,8 +78,8 @@ const Login = () => {
         })
       }
       <div className='row'>
-        <div className='offset-sm-5 col-sm-7'>
-          <Button handleClick={handleClick} > Login</Button>
+        <div className='offset-sm-4 col-sm-8'>
+          <Button handleClick={handleClick}> Login</Button>
           <Link className='ms-3' href="register">register</Link>
         </div>
       </div>

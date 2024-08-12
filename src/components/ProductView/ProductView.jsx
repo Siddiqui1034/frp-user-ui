@@ -48,18 +48,37 @@ const ProductView = (props) => {
   //     sessionStorage.pathName = pathName;
   //     return false;
   //   }
-  //   return true;
+  //   return true;  
   // }
 
-  const handleBuyNow = () => {
-    const res = AppCookie.isLoggedIn()
+  const handleBuyNow = async () => {
+    const res = await AppCookie.isLoggedIn()
+    console.log(22, res)
     if (!res) {
       // sessionStorage.path(pathName )
       sessionStorage.pathName = pathName
-      // router.push("/login")
-      console.log(101, pathName);
+      router.push("/login")
+      console.log(11111, pathName);
     }
   }
+
+//   const handleBuyNow = async () => {
+//     try {
+//         if (!fnIsLoggedIn()) {
+//             router.push('/login');
+//             alert("not login got to login page")
+//             return;
+//         }
+//         router.push(`/buy-now/${id}`)
+//         alert("logged in and go to buy now page")
+
+//     } catch (ex) {
+// console.error(ex.message)
+// // return ex.message
+//     } finally {
+
+//     }
+// }
 
   const handleAddToCart = async () => {
     try {

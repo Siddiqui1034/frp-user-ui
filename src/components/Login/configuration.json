@@ -7,7 +7,7 @@
         "isRequired": true,
         "value": "",
         "error": "",
-        "placeholder": "User id",
+        "placeholder": "User Id",
         "criteria": ["REQUIRED"],
         "errorMsgColumns": 4,
         "inputCtrlColumns": 4,

@@ -1,7 +1,12 @@
 import React from 'react'
-import Header from "@/components/Header/Header";
-import Loader from "@/reusableComponents/Loader";
-import Footer from "@/components/Footer/Footer";
+import Header from '@/components/Header';
+// import Loader from "@/reusableComponents/Loader";
+import Loader from '@/components/reusableComponents/Loader';
+
+import Footer from '@/components/Footer';
+
+
+// import Footer from "@/components/Footer/Footer";
 import { useSelector } from 'react-redux';
 
 export const LayoutWrapper = ({ children }) => {

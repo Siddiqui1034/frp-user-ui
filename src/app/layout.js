@@ -1,5 +1,6 @@
 "use client"
 import "./globals.css";
+import "bootstrap/dist/css/bootstrap.css"
 import { Provider, useSelector } from "react-redux";
 import { appStore } from "../redux2/appStore2/appStore2";
 import { AppContextProvider } from "../context/appContex";
