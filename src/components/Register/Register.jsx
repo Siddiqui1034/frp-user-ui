@@ -16,6 +16,7 @@ export const Register = () => {
 
   const [formControls, setFormControls] = useState(config)
   const dispatch = useDispatch();
+  // const {dispatch} = useAppContext();
 
   const handleClick = async () => {
     try {
@@ -26,8 +27,10 @@ export const Register = () => {
         type: "LOADER", 
         payload: true
       })  
+      
       const res = await Ajax.sendPostReq("cust/register",{data: dataObj})
-      // console.log(11, res);
+      console.log(11, res);
+      
       const {acknowledged, insertedId} = res?.data;
       if(acknowledged && insertedId){
         alert('success')

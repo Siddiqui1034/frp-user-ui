@@ -11,13 +11,15 @@ import { useSelector } from 'react-redux';
 
 export const LayoutWrapper = ({ children }) => {
   const store = useSelector((state) => state);
-
+  const isShowLoader = useSelector(state => state?.appReducer?.isShowLoader);
   return (
     <div>
       <Header />
       {children}
-      {store?.appReducer?.isShowLoader && <Loader />}
+      {/* {store?.appReducer?.isShowLoader && <Loader />} */}
       <Footer />
+      {isShowLoader && <Loader />}
+      
     </div>
   )
 }

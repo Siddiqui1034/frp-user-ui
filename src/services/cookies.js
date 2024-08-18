@@ -18,7 +18,6 @@ export class AppCookie {
         return cookieObjArr.value;
      }
      
-
     static async setCookie(name, value, days) { // here 'name'in setting cookie we use cookieStore.set({ name: "loc", value: "mumbai"}) not 'key' 'value' it is 'name' and 'value'
         const cookieObj = { name, value }
         if (days) {

@@ -23,44 +23,73 @@ const Login = () => {
   const router = useRouter();
 
   const handleClick = async () => {
+    // try {
+    //   const [isFormValid, dataObj] = formValidation(formControls, setFormControls)
+    //   if (!isFormValid) return;
+    //   dispatch({
+    //     type: "LOADER",
+    //     payload: true
+    //   });
+
+    //   const res = await Ajax.sendPostReq("cust/login", { data: dataObj });
+    //   const { token, _id, uid } = res?.data?.data;
+  
+    //   if (token) {
+    //     alert('Success')
+    //     sessionStorage.setItem("token", token)
+    //     AppCookie.setCookies("token", token);
+    //     AppCookie.setCookies("id", _id);
+    //     AppCookie.setCookies("uid", uid);
+    //     dispatch({ type: "AUTH", payload: { isLoggedIn: true, uid } })
+    //     if (sessionStorage.pathName) {
+    //       router.push(sessionStorage.pathName)
+    //       sessionStorage.pathName = "";
+    //     } else {
+    //       router.push('/')
+    //     }
+    //   } else {
+    //     dispatch({
+    //       type: "TOASTER", payload: {
+    //         isShowToaster: true,
+    //         toasterMessage: "Please Checked Entered Uid or Pwd",
+    //         toasterBG: 'red'
+    //       }
+    //     })
+    //   }
+
+    // } catch (ex) {
+    //   console.error("Login.tsx", ex)
+    //   dispatch({ type: "AUTH", payload: { isLoggedIn: false, uid: '' } })
+    // } finally {
+    //   dispatch({ type: "LOADER", payload: false })
+    // }
+
     try {
       const [isFormValid, dataObj] = formValidation(formControls, setFormControls)
-      if (!isFormValid) return;
-      dispatch({
-        type: "LOADER",
-        payload: true
-      })
-      const res = await Ajax.sendPostReq("cust/login", { data: dataObj });
-      const { token, _id, uid } = res?.data?.data
-      if (token) {
-        alert('Success')
-        sessionStorage.setItem("token", token)
-        AppCookie.setCookies("token", token);
-        AppCookie.setCookies("id", _id);
-        AppCookie.setCookies("uid", uid);
-        dispatch({ type: "AUTH", payload: { isLoggedIn: true, uid } })
-       
-        if (sessionStorage.pathName) {
-          router.push(sessionStorage.pathName)
-          sessionStorage.pathName = "";
-        } else {
-          router.push('/')
-        }
-      } else {
-        dispatch({
-          type: "TOASTER", payload: {
-            isShowToaster: true,
-            toasterMessage: "Please Checked Entered Uid or Pwd",
-            toasterBG: 'red'
-          }
-        })
+      if (!isFormValid) return;  
+      dispatch({type: "LOADER", payload: true})  
+      const res = await Ajax.sendPostReq("cust/login",{data: dataObj})
+      // console.log(11, res.data); // Now you can write condition
+      if(res?.data?.length > 0){
+        alert("Success")
       }
-
-    } catch (ex) {
-      console.error("Login.tsx", ex)
-      dispatch({ type: "AUTH", payload: { isLoggedIn: false, uid: '' } })
-    } finally {
-      dispatch({ type: "LOADER", payload: false })
+      const {acknowledged, insertedId} = res?.data;
+      if(acknowledged && insertedId){
+        alert('success')
+        console.log("LoginData is", res.data);        
+        clearValuesFromForm(formControls, setFormControls)
+      } else {
+        
+      }     
+    }
+    catch (exception) {
+      console.error("Login Page exception", exception);
+    }
+    finally {
+      dispatch({
+        type: "LOADER", 
+        payload: false
+      })
     }
   }
 
