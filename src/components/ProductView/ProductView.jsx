@@ -13,9 +13,8 @@ import { usePathname } from 'next/navigation'
 // import CardContent from '@mui/material/CardContent';
 // import CardMedia from '@mui/material/CardMedia';
 // import Typography from '@mui/material/Typography';
-import { Button, CardActionArea } from '@mui/material';
+import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation'
-
 
 const ProductView = (props) => {  
 
@@ -24,7 +23,7 @@ const ProductView = (props) => {
   const [product, setProduct] = useState({})
   const { id } = props?.params
   const dispatch = useDispatch();
-  // console.log(11, pathName);
+  // console.log(1120, pathName);
 
   const getProductDetails = async () => {
     try {
@@ -51,15 +50,24 @@ const ProductView = (props) => {
   //   return true;  
   // }
 
-  const handleBuyNow = async () => {
+  const checkAuth = async () =>{
     const res = await AppCookie.isLoggedIn()
-    console.log(22, res)
     if (!res) {
-      // sessionStorage.path(pathName )
       sessionStorage.pathName = pathName
       router.push("/login")
-      console.log(11111, pathName);
-    }
+      }
+  }
+
+  const handleBuyNow = async () => {
+    checkAuth();
+    // alert("hi")
+
+    // const res = await AppCookie.isLoggedIn()
+    // console.log(22, res)
+    // if (!res) {
+    //   sessionStorage.pathName = pathName
+    //   router.push("/login") 
+    // }
   }
 
 //   const handleBuyNow = async () => {
@@ -71,37 +79,52 @@ const ProductView = (props) => {
 //         }
 //         router.push(`/buy-now/${id}`)
 //         alert("logged in and go to buy now page")
-
 //     } catch (ex) {
 // console.error(ex.message)
 // // return ex.message
 //     } finally {
-
 //     }
 // }
 
   const handleAddToCart = async () => {
-    try {
-      if (!fnIsLoggedIn()) {
-          router.push('/login');
-          return;
-      }
-      dispatch({ type: "LOADER", payload: true })
+    try{
+      checkAuth();
+      
       const id = await AppCookie.getCookie("id")
-      const dataObj = { productId: product._id, uid: id }
-      const res = await Ajax.sendPostReq('cust/saveToCart', { data: dataObj })
-      const { acknowledged, insertedId, message } = res.data;
-      if (acknowledged && insertedId) {
-          handleToaster(dispatch, 'Added to the cart', 'green')
-          router.push('/cart')
-      } else {
-          handleToaster(dispatch, message, 'red')
-      }
-  } catch (ex) {
-      handleToaster(dispatch, ex.message, 'red')
-  } finally {
-      dispatch({ type: "LOADER", payload: false })
-  }
+      const dataObj = { productId: product._id, uid: id} //22:53
+      console.log(113, dataObj);
+      const res = await Ajax.sendPostReq('cust/saveToCart', { data: dataObj})
+      console.log(12, res)
+    }
+   catch(ex){ 
+
+   }
+   finally{
+
+   }
+    
+  //   try {
+  //     if (!fnIsLoggedIn()) {
+  //         router.push('/login');
+  //         return;
+  //     }
+  //     dispatch({ type: "LOADER", payload: true })
+  //     const id = await AppCookie.getCookie("id")
+  //     const dataObj = { productId: product._id, uid: id }
+  //     const res = await Ajax.sendPostReq('cust/saveToCart', { data: dataObj })
+  //     const { acknowledged, insertedId, message } = res.data;
+  //     if (acknowledged && insertedId) {
+  //         handleToaster(dispatch, 'Added to the cart', 'green')
+  //         router.push('/cart')
+  //     } else {
+  //         handleToaster(dispatch, message, 'red')
+  //     }
+  // } catch (ex) {
+  //     handleToaster(dispatch, ex.message, 'red')
+  // } finally {
+  //     dispatch({ type: "LOADER", payload: false })
+  // }
+
   }
 
   return (

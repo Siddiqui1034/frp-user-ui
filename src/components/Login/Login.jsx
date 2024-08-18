@@ -65,22 +65,27 @@ const Login = () => {
     // }
 
     try {
+      
       const [isFormValid, dataObj] = formValidation(formControls, setFormControls)
       if (!isFormValid) return;  
       dispatch({type: "LOADER", payload: true})  
       const res = await Ajax.sendPostReq("cust/login",{data: dataObj})
-      // console.log(11, res.data); // Now you can write condition
-      if(res?.data?.length > 0){
+      // console.log(110, res.data); // Now you can write condition
+      // if(res?.data?.length > 0){ // res.data is object so we can not check length of object if it is array then only we can check for length
+     
+      const  {token, _id, uid} = res?.data?.data;
+        if(token){
         alert("Success")
-      }
-      const {acknowledged, insertedId} = res?.data;
-      if(acknowledged && insertedId){
-        alert('success')
-        console.log("LoginData is", res.data);        
-        clearValuesFromForm(formControls, setFormControls)
-      } else {
+        AppCookie.setCookie("token", token)
+        sessionStorage.setItem("token", token)
+        AppCookie.setCookie("id", _id)
+        AppCookie.setCookie("uid", uid)
         
-      }     
+        if(sessionStorage.pathName){
+          router.push(sessionStorage.pathName)
+          sessionStorage.pathName = "";
+        }
+      }           
     }
     catch (exception) {
       console.error("Login Page exception", exception);

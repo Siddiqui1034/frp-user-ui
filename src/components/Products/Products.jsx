@@ -5,7 +5,6 @@ import { Ajax, VENDER_URL } from '@/services/ajax'
 import Search from '../Search/Search'
 import { useDispatch } from 'react-redux'
 import Link from 'next/link'
-
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -25,16 +24,14 @@ const Products = () => {
         payload: true
       })
       const res = await Ajax.sendGetReq("cust/getProducts")
-      setProductList(res.data)
-      setSearchProducts(res.data)
+      setProductList(res?.data)
+      setSearchProducts(res?.data)
       // console.log(res)                       
     } catch (ex) {
       console.error(ex.message)
+      setProductList([])
     } finally {
-      dispatch({
-        type: "LOADER",
-        payload: false
-      })
+      dispatch({type: "LOADER", payload: false})
     }
   }
 
@@ -62,7 +59,7 @@ const Products = () => {
               {/* {name} */}
               {/* <Card sx={{ maxWidth: 345 }}> */}
               <Card sx={{ width: 200 }}>
-              <Link href={`/product-view/${_id}`}>
+              <Link key={_id} href={`/product-view/${_id}`}>
                 <CardActionArea>
                   <CardMedia
                     sx={{ height: 140 }}

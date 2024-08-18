@@ -11,13 +11,13 @@ export class AppCookie {
 
     static async getCookie(key) {
         const cookieObj = await cookieStore.get(key)
-        return cookieObj;
+        return cookieObj.value;
      }
     static async getCookieAll() {
         const cookieObjArr = await cookieStore.getAll()
-        return cookieObjArr.value;
+        return cookieObjArr;
      }
-     
+      
     static async setCookie(name, value, days) { // here 'name'in setting cookie we use cookieStore.set({ name: "loc", value: "mumbai"}) not 'key' 'value' it is 'name' and 'value'
         const cookieObj = { name, value }
         if (days) {
