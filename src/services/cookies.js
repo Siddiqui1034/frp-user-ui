@@ -11,7 +11,7 @@ export class AppCookie {
 
     static async getCookie(key) {
         const cookieObj = await cookieStore.get(key)
-        return cookieObj.value;
+        return cookieObj?.value;
      }
     static async getCookieAll() {
         const cookieObjArr = await cookieStore.getAll()

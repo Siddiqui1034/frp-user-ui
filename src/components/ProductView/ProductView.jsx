@@ -16,6 +16,7 @@ import { usePathname } from 'next/navigation'
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation'
 
+
 const ProductView = (props) => {  
 
   const pathName = usePathname();
@@ -88,15 +89,17 @@ const ProductView = (props) => {
 
   const handleAddToCart = async () => {
     try{
-      checkAuth();
-      
+      checkAuth();      
       const id = await AppCookie.getCookie("id")
-      const dataObj = { productId: product._id, uid: id} //22:53
-      console.log(113, dataObj);
+      // console.log(product);      
+      const dataObj = { productId: product._id, customerid: id} //22:53
+      // console.log(113, dataObj);
       const res = await Ajax.sendPostReq('cust/saveToCart', { data: dataObj})
       console.log(12, res)
+    
     }
    catch(ex){ 
+console.error(ex.message);
 
    }
    finally{

@@ -1,5 +1,6 @@
 import axios from "axios";  
 import { AppCookie } from "./cookies";
+import { config } from "process";
 
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 export const VENDER_URL = process.env.NEXT_PUBLIC_VENDER_BASE_URL
@@ -22,16 +23,23 @@ export const VENDER_URL = process.env.NEXT_PUBLIC_VENDER_BASE_URL
 //AJAX interceptors
 // Add a request interceptor
 
-axios.interceptors.request.use(config => {
-   
-    const authToken =  sessionStorage.getItem("token")
-  
-      if(authToken){
-        config.headers.Authorization = `${authToken}`;
-      } 
-      return config;  
-});
+axios.interceptors.request.use(config =>{
+ 
+    const authToken = sessionStorage.getItem("token") // double quote only
+    if(authToken){
+      config.headers.Authorization = `${authToken}` 
+    } 
+  return config;
+})
 
+// axios.interceptors.response.use(
+//   (res) =>{
+//     console.log("response called", res);    
+//   },
+//   (error) =>{
+//     console.error("response error", error);    
+//   }
+// )
 
 
 // // Add a response interceptor
