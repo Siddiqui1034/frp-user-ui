@@ -1,4 +1,2 @@
-
-import { Buynow } from "@/components/Buynow";
-
-export default Buynow;
+import BuyNow from "@/components/BuyNow";
+export default BuyNow;

@@ -1,14 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
 
-const Input = ({  value, src, lbl, isRequired, type, name, placeholder, handleChange, error, options, values, lblColumns, errorMsgColumns, inputCtrlColumns})=> {
+const Input = ({  value, src, disabled, lbl, isRequired, type, name, placeholder, handleChange, error, options, values, lblColumns, errorMsgColumns, inputCtrlColumns})=> {
  
   const fnPrepareInputControls= () => {
   switch(type){
     case "text":
     case "password":
     case "number":
-      return <input  value={value} className='form-control' onChange={handleChange} type={type} name={name} placeholder={placeholder}  />
+      return <input disabled={disabled} value={value} className='form-control' onChange={handleChange} type={type} name={name} placeholder={placeholder}  />
     
     case "radio" :
     return <>

@@ -1,0 +1,21 @@
+.menu{
+    color: white;
+    background-color: black;
+    font-size: 20px;
+    text-align: left;
+    position: absolute;
+    z-index: 999;
+    right: 15px;
+    width: 125px;
+    padding: 8px;
+    margin: 8px;
+    top: 65px;
+}
+
+.menu > a {
+    display: block;        
+    letter-spacing: 2px;
+    margin: 5px;
+    color: aliceblue;
+    text-decoration: none;
+}

@@ -1,0 +1,59 @@
+[
+    {
+        "lbl": "Name",
+        "tag": "input",
+        "type": "text",
+        "name": "name",
+        "isRequired":" true",
+        "value": "",
+        "error": "",
+        "criteria": [ "REQUIRED" ],
+        "placeholder": "Name",
+        "lblColumns": 12,
+        "errorMsgColumns": 12,
+        "inputCtrlColumns": 12
+    },
+    {
+        "lbl": "City",
+        "tag": "input",
+        "type": "text",
+        "name": "city",
+        "isRequired":" true",
+        "value": "",
+        "error": "",
+        "criteria": [ "REQUIRED" ],
+        "placeholder": "City",
+        "lblColumns": 12,
+        "errorMsgColumns": 12,
+        "inputCtrlColumns": 12
+    },
+    {
+        "lbl": "Phone",
+        "tag": "input",
+        "type": "text",
+        "name": "phone",
+        "isRequired":" true",
+        "value": "",
+        "error": "",
+        "criteria": [ "REQUIRED" ],
+        "placeholder": "Phone",
+        "lblColumns": 12,
+        "errorMsgColumns": 12,
+        "inputCtrlColumns": 12
+    },
+    {
+        "lbl": "Pin",
+        "tag": "input",
+        "type": "number",
+        "name": "pin",
+        "isRequired":" true",
+        "value": "",
+        "error": "",
+        "criteria": [ "REQUIRED" ],
+        "placeholder": "Pin",
+        "lblColumns": 12,
+        "errorMsgColumns": 12,
+        "inputCtrlColumns": 12
+    }
+    
+]

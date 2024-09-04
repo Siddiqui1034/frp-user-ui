@@ -1,0 +1,22 @@
+[
+    {
+        "label": "Profile",
+        "path": "profile",
+        "id": "profile"
+    },
+    {
+        "label": "Orders",
+        "path": "orders",
+        "id": "orders"
+    },
+    {
+        "label": "Cart",
+        "path": "cart",
+        "id": "cart"
+    },
+    {
+        "label": "Logout",
+        "path": "/",
+        "id": "logout"
+    }
+]

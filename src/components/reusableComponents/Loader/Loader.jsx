@@ -7,7 +7,7 @@ const Loader = () => {
     <div className={`${styles.mask}`}>  
     
     </div>
-    <Image src="/loader2.gif" alt="Loading..." width={100} height={100} />
+    <Image unoptimized src="/loader2.gif" alt="Loading..." width={100} height={100} />
     </>
   )
 }

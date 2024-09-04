@@ -8,11 +8,6 @@ import Image from 'next/image'
 import { Grid } from '@mui/material'
 import { AppCookie } from '@/services/cookies'
 import { usePathname } from 'next/navigation'
-// import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation'
 
@@ -24,7 +19,6 @@ const ProductView = (props) => {
   const [product, setProduct] = useState({})
   const { id } = props?.params
   const dispatch = useDispatch();
-  // console.log(1120, pathName);
 
   const getProductDetails = async () => {
     try {
@@ -51,18 +45,35 @@ const ProductView = (props) => {
   //   return true;  
   // }
 
-  const checkAuth = async () =>{
-    const res = await AppCookie.isLoggedIn()
-    if (!res) {
+  const fnIsLoggedIn = () => {
+    // const res = await AppCookie.isLoggedIn()
+    const token = sessionStorage.token
+    // if (!res) {
+    if (!token){
       sessionStorage.pathName = pathName
       router.push("/login")
+      return false;
       }
+      return true;
   }
 
   const handleBuyNow = async () => {
-    checkAuth();
-    // alert("hi")
+    try{
+      if(!fnIsLoggedIn()){
+        router.push('/login')
+        return;
+      }
+      router.push(`/buy-now/${id}`) 
+    }
+    catch(ex){
+      console.error(ex.message,);      
+    }
+    finally{
 
+    }
+    // fnIsLoggedIn();
+
+    // alert("hi")
     // const res = await AppCookie.isLoggedIn()
     // console.log(22, res)
     // if (!res) {
@@ -89,21 +100,35 @@ const ProductView = (props) => {
 
   const handleAddToCart = async () => {
     try{
-      checkAuth();      
+      if(!fnIsLoggedIn()){
+        router.push('/login');
+        return;
+      }       
+      dispatch({type: "LOADER", payload: true })   
+      
       const id = await AppCookie.getCookie("id")
       // console.log(product);      
-      const dataObj = { productId: product._id, customerid: id} //22:53
+      const dataObj = { productId: product._id, uid: id} //22:53 here uid is uid , uid is user Id or customer Id;
       // console.log(113, dataObj);
       const res = await Ajax.sendPostReq('cust/saveToCart', { data: dataObj})
-      console.log(12, res)
-    
+      // console.log(220, res)
+      const { acknowledged, insertedId, message, count } = res.data 
+      if(acknowledged && insertedId ){
+        // dispatch({ type: "TOASTER", payload: { isShowToaster: true, toasterMessage: 'Added to the cart', toasterBG: 'green' } })
+        handleToaster(dispatch, "Added to the Cart", " green " )
+        sessionStorage.cartCount = count; 
+        dispatch({type: "AUTH", payload: {cartCount: count } })
+        router.push('/cart')
+      }else{
+        handleToaster(dispatch, message, 'red');
+      }
     }
    catch(ex){ 
-console.error(ex.message);
+    console.error(ex.message);
 
    }
    finally{
-
+    dispatch({type: "LOADER", payload: false }) 
    }
     
   //   try {
@@ -133,10 +158,10 @@ console.error(ex.message);
   return (
     <div>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item="true" xs={6}>
           {product?.path && <Image src={`${VENDER_URL}${product?.path}`} alt="product image" width={500} height={400} />}
         </Grid>
-        <Grid item xs={6}>
+        <Grid item="true" xs={6}>
           <h1>Product Name:{product?.name} </h1>
           <h3>Product Cost:{product?.cost} </h3>
           <Button onClick={handleBuyNow} variant="contained" size="large">Buy Now</Button>

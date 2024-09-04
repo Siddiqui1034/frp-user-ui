@@ -13,7 +13,7 @@ export class AppCookie {
         const cookieObj = await cookieStore.get(key)
         return cookieObj?.value;
      }
-    static async getCookieAll() {
+    static async getAllCookie() {
         const cookieObjArr = await cookieStore.getAll()
         return cookieObjArr;
      }
@@ -29,12 +29,20 @@ export class AppCookie {
 
     // static updateCookie() { } // we dont need with setCookie the same updatecookie will do the work
    
-    static async deleteCookie(key){ // it also expecting name and value
+    static async deleteCookie(key) { // it also expecting name and value
         await cookieStore.delete(key)
     }
 
-    static async isLoggedIn(key){
+    static async isLoggedIn(key) {
         const cookieObj = await cookieStore.get("token")
         return cookieObj?.value ? true : false
+    }
+
+    static async clearCookie(){
+        const cookies = await cookieStore.getAll(); 
+        cookies.forEach( async ({name}) => {
+            // console.log(name);            
+            await cookieStore.delete(name)   
+        })
     }
 }
