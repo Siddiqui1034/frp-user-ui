@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const Toaster = () => {
     const [count, setCount] = useState(0)
     // const {state, dispatch} = useAppCtx();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const {toasterMessage, toasterBG} = useSelector((state)=>{
         return state?.appReducer?.toaster 
     })
@@ -46,7 +46,7 @@ const Toaster = () => {
     <div  className={`${styles.appToaster}`}>
       <span className='ms-2'>{toasterMessage}</span>
       <b onClick={fnHideToaster} className={`${styles.button}`}>X</b>
-    <div style={{ width:count, background: toasterBG}}></div>
+    <div style={{ width: 0, background: toasterBG}}></div>
     </div>
   )
 }

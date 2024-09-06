@@ -29,7 +29,10 @@ const dispatch = useDispatch();
           </Link>
             Customer Portal
             {/* {isLoggedIn ? <b>{uid.slice(0, 1)}</b>: ''}  */}
-            {isLoggedIn ? <> <CartButton />
+            {
+            isLoggedIn ? 
+            <>
+            <CartButton />
             <Avatar onClick={handleClick} sx={{ cursor:'pointer', bgcolor: deepOrange[500], position:'absolute', top:'20px', right:'30px' }}>{uid?.slice(0,1)}</Avatar> 
             {isShowMenu && <Menu />}
             </>

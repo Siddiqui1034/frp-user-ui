@@ -26,8 +26,8 @@ export const appReducer = (state = init, action) => {
         case 'TOASTER':
             return {
                 ...state,
-                // toaster: action.payload,
-                isShowToaster: action.payload
+                toaster: action.payload,
+                // isShowToaster: action.payload
             }
 
         default:

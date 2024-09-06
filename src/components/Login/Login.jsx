@@ -76,7 +76,9 @@ const Login = () => {
         // AppCookie.setCookie('image', profile);
         // dispatch({ type: "Auth", payload: true })
         // dispatch({ type: "AUTH", payload: { isLoggedIn: true, uid, cartCount: count, image: profile } })
+        dispatch({ type: "AUTH", payload: { isLoggedIn: true, uid } })
         if (sessionStorage.pathName) {
+          debugger;
           router.push(sessionStorage.pathName)
           sessionStorage.pathName = "";
         } else {
@@ -88,8 +90,8 @@ const Login = () => {
           type: "TOASTER",
           payload: {
             isShowToaster: true,
-            toasterMessage: 'Please Checked Entered Uid or Pwd',
-            toasterBG: 'red'
+            toasterMessage: "Please Checked Entered Uid or Pwd",
+            toasterBG: "red"
           }
         })
       }
